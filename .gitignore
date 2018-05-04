@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Src/.vs/config
+/Src/AirportsFeedReader.Data/bin
+/Src/AirportsFeedReader.Common/obj
+/Src/AirportsFeedReader.Common/bin
+/Src/AirportsFeedReader.Foundation/bin
+/Src/AirportsFeedReader.Foundation/obj
+/Src/AirportsFeedReader.Services/obj
+/Src/AirportsFeedReader.Services/bin
+/Src/AirportsFeedReader.Tests/obj
+/Src/AirportsFeedReader.Tests/bin
+/Src/AirportsFeedReader.Web/bin
+/Src/AirportsFeedReader.Web/obj
+/Src/packages
