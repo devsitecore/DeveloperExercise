@@ -24,9 +24,9 @@ namespace AirportsFeedReader.Services.Repositories
 
         private IFeedReader FileFeedReader { get; set; }
 
-        public async Task<IList<Country>> GetCountries()
+        public IList<Country> GetCountries()
         {
-            var feedResult = await this.FileFeedReader.Read(this.countriesFileFeedPath, "CountriesCacheData");
+            var feedResult = this.FileFeedReader.Read(this.countriesFileFeedPath, "CountriesCacheData");
             var countries = feedResult.Data.ToModelList<IList<Country>>();
 
             return countries;

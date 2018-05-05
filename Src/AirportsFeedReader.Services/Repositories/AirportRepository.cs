@@ -24,9 +24,9 @@ namespace AirportsFeedReader.Services.Repositories
 
         private IFeedReader FeedReader { get; set; }
 
-        public virtual async Task<DistanceResult> CalculateDistance(string source, string destination)
+        public virtual DistanceResult CalculateDistance(string source, string destination)
         {
-            var airports = await this.GetAirports();
+            var airports = this.GetAirports();
             var result = new DistanceResult();
 
             var sourceAirport = airports.Where(airport => airport.Iata == source).Select(airport => airport).FirstOrDefault<Airport>();
@@ -45,9 +45,9 @@ namespace AirportsFeedReader.Services.Repositories
             return result;
         }
 
-        public virtual async Task<IList<Airport>> GetAirports()
+        public virtual IList<Airport> GetAirports()
         {
-            var feedResult = await this.FeedReader.Read(this.feedUrl);
+            var feedResult = this.FeedReader.Read(this.feedUrl);
             var airports = feedResult.Data.ToModelList<IList<Airport>>();
 
             return airports;

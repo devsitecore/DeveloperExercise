@@ -32,17 +32,17 @@ namespace AirportsFeedReader.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> CalculateDistance(string source, string destination)
+        public JsonResult CalculateDistance(string source, string destination)
         {
-            var distance = await this.AirportRepository.CalculateDistance(source, destination);
+            var distance = this.AirportRepository.CalculateDistance(source, destination);
             return this.Json(distance, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         [FromFeedHeader]
-        public async Task<JsonResult> GetAirportsList()
+        public JsonResult GetAirportsList()
         {
-            var airports = await this.AirportRepository.GetAirports();
+            var airports = this.AirportRepository.GetAirports();
             return this.Json(airports, JsonRequestBehavior.AllowGet);
         }
     }

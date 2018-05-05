@@ -9,6 +9,6 @@ namespace AirportsFeedReader.Foundation.Contracts
 
     public interface IFeedReader
     {
-        Task<FeedReaderResult> Read(string feedUrl, string cacheKey = "");
+        FeedReaderResult Read(string feedUrl, string cacheKey = "");
     }
 }

@@ -10,7 +10,7 @@ namespace AirportsFeedReader.Foundation.Contracts
 
     public interface ICountryRepository
     {
-        Task<IList<Country>> GetCountries();
+        IList<Country> GetCountries();
 
         void Init(IFeedReader feedReader = null);
     }

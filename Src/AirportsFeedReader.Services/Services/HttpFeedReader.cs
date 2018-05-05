@@ -24,7 +24,7 @@ namespace AirportsFeedReader.Services.Services
 
         private IFilterFeedResult FilterFeedResult { get; set; }
 
-        public async Task<FeedReaderResult> Read(string feedUrl, string cacheKey = "")
+        public FeedReaderResult Read(string feedUrl, string cacheKey = "")
         {
             var feedReaderResult = new FeedReaderResult();
             var data = this.CacheHandler.GetData(cacheKey);
@@ -35,8 +35,8 @@ namespace AirportsFeedReader.Services.Services
                 feedSource = FeedSource.Feed;
 
                 var httpClient = new HttpClient();
-                var feedData = await httpClient.GetAsync(feedUrl);
-                data = await feedData.Content.ReadAsStringAsync();
+                var feedData = httpClient.GetAsync(feedUrl).Result;
+                data = feedData.Content.ReadAsStringAsync().Result;
 
                 data = this.FilterFeedResult.Filter(data);
 

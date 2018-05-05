@@ -25,9 +25,9 @@ namespace AirportsFeedReader.Controllers
 
         [HttpGet]
         [OutputCache(Duration = int.MaxValue, VaryByParam = "none")]
-        public async Task<JsonResult> GetCountriesList()
+        public JsonResult GetCountriesList()
         {
-            var countries = await this.CountryRepository.GetCountries();
+            var countries = this.CountryRepository.GetCountries();
             return this.Json(countries, JsonRequestBehavior.AllowGet);
         }
     }

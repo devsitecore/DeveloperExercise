@@ -23,7 +23,7 @@ namespace AirportsFeedReader.Services.Services
 
         private IFilterFeedResult FilterFeedResult { get; set; }
 
-        public async Task<FeedReaderResult> Read(string feedUrl, string cacheKey = "")
+        public FeedReaderResult Read(string feedUrl, string cacheKey = "")
         {
             var feedReaderResult = new FeedReaderResult();
             var cacheResult = this.CacheStorage.GetData(cacheKey);
@@ -37,7 +37,7 @@ namespace AirportsFeedReader.Services.Services
 
                 if (File.Exists(feedUrl))
                 {
-                    data = await Task.Run(() => File.ReadAllText(feedUrl));
+                    data = File.ReadAllText(feedUrl);
                     data = this.FilterFeedResult.Filter(data);
                 }
 
