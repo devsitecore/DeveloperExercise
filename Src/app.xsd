@@ -4,19 +4,6 @@
   <xs:element name="configuration">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="configSections">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="section">
-                <xs:complexType>
-                  <xs:attribute name="name" type="xs:string" use="required" />
-                  <xs:attribute name="type" type="xs:string" use="required" />
-                  <xs:attribute name="requirePermission" type="xs:boolean" use="optional" />
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="connectionStrings">
           <xs:complexType>
             <xs:sequence>
