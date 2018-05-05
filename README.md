@@ -26,7 +26,7 @@ You can compile the application, it should install the packages from NuGet durin
 ## Testing the output:
 Once you run the application, it will open the home page.
 
-![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/airports-list.png?raw=true)
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/home-screen.png?raw=true)
 
 This is the start page and it provides the basic navigation options to view two areas.
  - View Listing
@@ -35,29 +35,31 @@ This is the start page and it provides the basic navigation options to view two 
 ### View Airports Listing
 Once you click View Listing link, you will be redirected to /airports/ view.
  
-[Image]
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/airports-list.png?raw=true)
  
 With page load, an ajax request will be made to web-api (/Airports/GetAirportsList) that will return JSON for all airports in Europe. List of airports will be stored on the client side in a KnockoutJS model and filter by country will be done on client side.
 
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/airports-list-filter.png?raw=true)
+
 You can also test output of the API "/Airports/GetAirportsList" in tools like PostMan in order to test if correct header is returned or not. In the web-view, you can go to developer tool and look at the console log, returned header is displayed in the console.
 
-[Image]
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/console-log.png?raw=true)
 
 Pager is also added with the airports grid.
 
-[Image]
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/airports-list-paging.png?raw=true)
 
 ### Calculate Distance
 Once you click Calculate Distance link, you will be redirected to /airports/distance view.
 
-[Image]
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/destination-calculator-start.png?raw=true)
 
 This page will show you two drop-downs each listing all airports in europe from the same feed source as used in the listing view.
 
-[Image]
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/destination-calculator.png?raw=true)
 
 You can choose airports and click the Calculate Distance button, and it will make another ajax call "/airports/calculatedistance?source=[Source]&destination=[Dest]", IATA codes of selected airports will be sent over to the ajax call, that will return the distance between two airports in Kilometers. 0 will be returned in case either of both airports is missing or same airport is selected in both drop-downs.
 
-[Image]
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/destination-calculator-api.png?raw=true)
 
 API Url is also displayed so that you can click and view the raw output in the new browser tab.
