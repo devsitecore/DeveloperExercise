@@ -26,7 +26,7 @@ You can compile the application, it should install the packages from NuGet durin
 ## Testing the output:
 Once you run the application, it will open the home page.
 
-[Home Page Image]
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/documentation/airports-list.png?raw=true)
 
 This is the start page and it provides the basic navigation options to view two areas.
  - View Listing
