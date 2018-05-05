@@ -8,6 +8,7 @@ namespace AirportsFeedReader.Services.Services
     using System.Threading.Tasks;
     using Foundation.Contracts;
     using Foundation.Model;
+    using System;
 
     public class HttpFeedReader : IFeedReader
     {
@@ -26,21 +27,29 @@ namespace AirportsFeedReader.Services.Services
 
         public FeedReaderResult Read(string feedUrl, string cacheKey = "")
         {
-            var feedReaderResult = new FeedReaderResult();
-            var data = this.CacheHandler.GetData(cacheKey);
             var feedSource = FeedSource.Cache;
+            var feedReaderResult = new FeedReaderResult();
+
+            var data = this.CacheHandler.GetData(cacheKey);
 
             if (string.IsNullOrEmpty(data))
             {
-                feedSource = FeedSource.Feed;
+                try
+                {
+                    feedSource = FeedSource.Feed;
 
-                var httpClient = new HttpClient();
-                var feedData = httpClient.GetAsync(feedUrl).Result;
-                data = feedData.Content.ReadAsStringAsync().Result;
+                    var httpClient = new HttpClient();
+                    var feedData = httpClient.GetAsync(feedUrl).Result;
+                    data = feedData.Content.ReadAsStringAsync().Result;
 
-                data = this.FilterFeedResult.Filter(data);
+                    data = this.FilterFeedResult.Filter(data);
 
-                this.CacheStorage.SaveDate(data, cacheKey);
+                    this.CacheStorage.SaveDate(data, cacheKey);
+                }
+                catch
+                {
+                    feedSource = FeedSource.None;
+                }
             }
 
             feedReaderResult.FeedSource = feedSource;
