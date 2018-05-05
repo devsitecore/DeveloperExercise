@@ -19,3 +19,4 @@
 /Src/packages
 /Src/.vs/AirportsFeedReader/v14
 *.bak
+/Documentation

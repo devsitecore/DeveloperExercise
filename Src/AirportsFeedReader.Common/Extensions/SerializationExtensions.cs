@@ -1,15 +1,14 @@
-﻿// <copyright file="FoundationExtensions.cs" company="PlaceholderCompany">
+﻿// <copyright file="SerializationExtensions.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace AirportsFeedReader.Foundation.Extensions
+namespace AirportsFeedReader.Common.Extensions
 {
     using System.IO;
     using System.Runtime.Serialization.Json;
     using System.Text;
-    using Model;
 
-    public static class FoundationExtensions
+    public static class SerializationExtensions
     {
         public static string ToJson<T>(this T model)
         {

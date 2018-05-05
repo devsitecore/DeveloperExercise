@@ -16,14 +16,7 @@ namespace AirportsFeedReader.Data
     {
         private readonly string noSqlConnectionStringName = "NoSqlCacheDatabaseConnectionString";
         private readonly string defaultCacheKey = "AirportsCacheData";
-
-        protected virtual string DataTableName
-        {
-            get
-            {
-                return "NoSqlCache";
-            }
-        }
+        private readonly string dataTableName = "NoSqlCache";
 
         protected virtual string SQLiteConnectionString
         {
@@ -52,7 +45,7 @@ namespace AirportsFeedReader.Data
                 {
                     connection.Open();
 
-                    var sql = "create table " + this.DataTableName + " (cacheDate datetime, cacheData nvarchar(100), cacheKey varchar(50))";
+                    var sql = "create table " + this.dataTableName + " (cacheDate datetime, cacheData nvarchar(100), cacheKey varchar(50))";
 
                     using (var command = new SQLiteCommand(sql, connection))
                     {
@@ -106,7 +99,7 @@ namespace AirportsFeedReader.Data
             {
                 connection.Open();
 
-                var sql = string.Format("delete from {0} where cacheKey='{1}'", this.DataTableName, this.GetCacheKey(cacheKey));
+                var sql = string.Format("delete from {0} where cacheKey='{1}'", this.dataTableName, this.GetCacheKey(cacheKey));
 
                 using (var command = new SQLiteCommand(sql, connection))
                 {
@@ -127,7 +120,7 @@ namespace AirportsFeedReader.Data
 
                 data = data.Replace("'", "''");
 
-                var sql = string.Format("insert into {0} (cacheDate, cacheData, cacheKey) values ('{1}', '{2}', '{3}')", this.DataTableName, DateTime.UtcNow, data, this.GetCacheKey(cacheKey));
+                var sql = string.Format("insert into {0} (cacheDate, cacheData, cacheKey) values ('{1}', '{2}', '{3}')", this.dataTableName, DateTime.UtcNow, data, this.GetCacheKey(cacheKey));
 
                 using (var command = new SQLiteCommand(sql, connection))
                 {
@@ -142,7 +135,7 @@ namespace AirportsFeedReader.Data
 
         protected virtual string GetSelectSql(string cacheKey)
         {
-            return string.Format("select * from {0} where cacheKey='{1}'", this.DataTableName, this.GetCacheKey(cacheKey));
+            return string.Format("select * from {0} where cacheKey='{1}'", this.dataTableName, this.GetCacheKey(cacheKey));
         }
 
         private string GetCacheKey(string cacheKey)

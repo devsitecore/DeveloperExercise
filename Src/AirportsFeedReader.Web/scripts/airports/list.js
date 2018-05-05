@@ -148,6 +148,11 @@
                     async: false,
                 });
 
+                let fromFeed = data.getResponseHeader("from-feed");
+
+                if (fromFeed) {
+                    console.log(`${apiUrl} returned the header "from-feed"="${fromFeed}"`);
+                }
                 return JSON.parse(data.responseText);
                 //resolve(JSON.parse(data.responseText));
             //});

@@ -58,7 +58,6 @@
     <Compile Include="Contracts\IFilterFeedResult.cs" />
     <Compile Include="Contracts\IFeedReader.cs" />
     <Compile Include="Contracts\ICacheStorage.cs" />
-    <Compile Include="Extensions\FoundationExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\DistanceResult.cs" />
     <Compile Include="Model\Country.cs" />

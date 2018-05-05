@@ -41,7 +41,7 @@ namespace AirportsFeedReader.Web
             context.HttpContext.Response.Headers.Add(this.headerName, feedSource.ToString());
         }
 
-        protected virtual void Init(ICacheHandler cacheHandler)
+        protected void Init(ICacheHandler cacheHandler)
         {
             this.CacheHandler = cacheHandler;
         }

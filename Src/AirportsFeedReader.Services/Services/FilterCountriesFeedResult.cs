@@ -6,8 +6,9 @@ namespace AirportsFeedReader.Services.Services
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Common.Extensions;
+    using Common.Extensions;
     using Foundation.Contracts;
-    using Foundation.Extensions;
     using Foundation.Model;
 
     public class FilterCountriesFeedResult : IFilterFeedResult

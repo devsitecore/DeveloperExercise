@@ -8,9 +8,8 @@ namespace AirportsFeedReader.Services.Repositories
     using System.Collections.Generic;
     using System.Configuration;
     using System.Linq;
-    using System.Threading.Tasks;
+    using Common.Extensions;
     using Foundation.Contracts;
-    using Foundation.Extensions;
     using Foundation.Model;
 
     public class AirportRepository : IAirportRepository
