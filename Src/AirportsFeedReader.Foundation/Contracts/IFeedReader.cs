@@ -4,7 +4,6 @@
 
 namespace AirportsFeedReader.Foundation.Contracts
 {
-    using System.Threading.Tasks;
     using Model;
 
     public interface IFeedReader

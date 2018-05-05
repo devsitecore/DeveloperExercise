@@ -5,7 +5,6 @@
 namespace AirportsFeedReader.Services.Services
 {
     using System.IO;
-    using System.Threading.Tasks;
     using Common.Extensions;
     using Common.Unity;
     using Foundation.Contracts;

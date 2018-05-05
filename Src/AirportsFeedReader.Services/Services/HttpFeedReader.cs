@@ -5,10 +5,8 @@
 namespace AirportsFeedReader.Services.Services
 {
     using System.Net.Http;
-    using System.Threading.Tasks;
     using Foundation.Contracts;
     using Foundation.Model;
-    using System;
 
     public class HttpFeedReader : IFeedReader
     {

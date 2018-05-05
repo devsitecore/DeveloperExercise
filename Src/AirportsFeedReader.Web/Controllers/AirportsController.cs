@@ -4,7 +4,6 @@
 
 namespace AirportsFeedReader.Web.Controllers
 {
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Foundation.Contracts;
 
