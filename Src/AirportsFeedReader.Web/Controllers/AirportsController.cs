@@ -1,37 +1,34 @@
-﻿using AirportsFeedReader.Foundation.Contracts;
-using AirportsFeedReader.Foundation.Extensions;
-using AirportsFeedReader.Foundation.Model;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿// <copyright file="AirportsController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace AirportsFeedReader.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Foundation.Contracts;
+
     public class AirportsController : Controller
     {
-        private IAirportRepository AirportRepository { get; set; }
-
         public AirportsController(IAirportRepository airportRepository)
         {
             this.AirportRepository = airportRepository;
         }
 
+        private IAirportRepository AirportRepository { get; set; }
+
         [HttpGet]
         [OutputCache(Duration = int.MaxValue, VaryByParam = "none")]
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
-        //[OutputCache(Duration = int.MaxValue, VaryByParam = "none")]
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "none")]
         public ActionResult Distance()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]

@@ -1,7 +1,11 @@
-﻿namespace AirportsFeedReader.Web
+﻿// <copyright file="ContainerConfig.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace AirportsFeedReader.Web
 {
-    using Common.Unity;
     using System.Web.Mvc;
+    using Common.Unity;
     using Unity;
 
     public static class ContainerConfig

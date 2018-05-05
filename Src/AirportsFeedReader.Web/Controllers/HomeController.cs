@@ -1,8 +1,9 @@
-﻿namespace AirportsFeedReader.Web.Controllers
+﻿// <copyright file="HomeController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace AirportsFeedReader.Web.Controllers
 {
-    using Data;
-    using Foundation.Contracts;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     public class HomeController : Controller
@@ -13,7 +14,7 @@
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿namespace AirportsFeedReader.Web
+﻿// <copyright file="ControllerFactory.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace AirportsFeedReader.Web
 {
     using System;
     using System.Web.Mvc;
@@ -8,11 +12,6 @@
     public class ControllerFactory : DefaultControllerFactory
     {
         /// <summary>
-        /// The container
-        /// </summary>
-        private readonly IUnityContainer Container;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ControllerFactory"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
@@ -20,6 +19,11 @@
         {
             this.Container = container;
         }
+
+        /// <summary>
+        /// Gets or sets the container
+        /// </summary>
+        private IUnityContainer Container { get; set; }
 
         /// <summary>
         /// Retrieves the controller instance for the specified request context and controller type.

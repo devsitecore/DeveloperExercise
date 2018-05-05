@@ -1,4 +1,7 @@
-﻿
+﻿// <copyright file="CountriesController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace AirportsFeedReader.Controllers
 {
     using System.Threading.Tasks;
@@ -7,17 +10,17 @@ namespace AirportsFeedReader.Controllers
 
     public class CountriesController : Controller
     {
-        private ICountryRepository CountryRepository { get; set; }
-
         public CountriesController(ICountryRepository countryRepository)
         {
             this.CountryRepository = countryRepository;
         }
 
+        private ICountryRepository CountryRepository { get; set; }
+
         [OutputCache(Duration = int.MaxValue, VaryByParam = "none")]
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]

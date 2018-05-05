@@ -1,11 +1,10 @@
-﻿// <copyright file="Airport.cs" company="PlaceholderCompany">
+﻿// <copyright file="DistanceResult.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace AirportsFeedReader.Foundation.Model
 {
     using System;
-    using System.Device.Location;
     using System.Runtime.Serialization;
 
     [DataContract]
