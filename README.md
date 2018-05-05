@@ -50,7 +50,7 @@ Pager is also added with the airports grid.
 ![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/airports-list-paging.png?raw=true)
 
 ### Calculate Distance
-Once you click Calculate Distance link, you will be redirected to /airports/distance view.
+Once you click Calculate Distance link on the home page, you will be redirected to /airports/distance view.
 
 ![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/destination-calculator-start.png?raw=true)
 
@@ -60,6 +60,23 @@ This page will show you two drop-downs each listing all airports in europe from 
 
 You can choose airports and click the Calculate Distance button, and it will make another ajax call "/airports/calculatedistance?source=[Source]&destination=[Dest]", IATA codes of selected airports will be sent over to the ajax call, that will return the distance between two airports in Kilometers. 0 will be returned in case either of both airports is missing or same airport is selected in both drop-downs.
 
+API Url is also displayed so that you can click and view the raw output in the new browser tab.
+
 ![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/destination-calculator-api.png?raw=true)
 
-API Url is also displayed so that you can click and view the raw output in the new browser tab.
+## Code Metrics:
+![Listing](https://github.com/devsitecore/DeveloperExercise/blob/master/Documentation/code-metrics.png?raw=true)
+
+## Documentation:
+You can review the overall documentation about project details on the following url:
+https://github.com/devsitecore/DeveloperExercise/wiki/Documentation
+
+## Whats Left?
+### Unit Tests
+Unit tests are added for main functionality, more tests can be written for full test coverage.
+
+### Unit Tests for Java-script
+Unit tests can be added for some java-script functions too using tools like Mocha 
+
+### Configuration for format and unit for distance
+For now format for distance is in en-us language culture (200,20.20) and the unit is Kilometers. We can configure this to support units and formats used in other language cultures.
