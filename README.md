@@ -69,7 +69,7 @@ API Url is also displayed so that you can click and view the raw output in the n
 
 ## Documentation:
 You can review the overall documentation about project details on the following url:
-https://github.com/devsitecore/DeveloperExercise/wiki/Documentation
+https://github.com/devsitecore/DeveloperExercise/wiki
 
 ## Whats Left?
 ### Unit Tests
