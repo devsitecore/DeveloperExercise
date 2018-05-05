@@ -11,5 +11,7 @@ namespace AirportsFeedReader.Foundation.Contracts
     public interface IAirportRepository
     {
         Task<IList<Airport>> GetAirports();
+
+        Task<DistanceResult> CalculateDistance(string source, string destination);
     }
 }

@@ -5,6 +5,7 @@
 namespace AirportsFeedReader.Foundation.Model
 {
     using System;
+    using System.Device.Location;
     using System.Runtime.Serialization;
 
     [DataContract]
@@ -15,7 +16,7 @@ namespace AirportsFeedReader.Foundation.Model
         public string Iata { get; set; }
 
         [DataMember(Name="lon")]
-        public string Longitude { get; set; }
+        public double Longitude { get; set; }
 
         [DataMember(Name = "iso")]
         public string Iso { get; set; }
@@ -33,9 +34,21 @@ namespace AirportsFeedReader.Foundation.Model
         public string Type { get; set; }
 
         [DataMember(Name = "lat")]
-        public string Latitude { get; set; }
+        public double Latitude { get; set; }
 
         [DataMember(Name = "size")]
         public string Size { get; set; }
+
+        public double Distance(Airport destinatin)
+        {
+            double distance = 0;
+
+            var sourceCoord = new GeoCoordinate(this.Latitude, this.Longitude);
+            var destinationCoord = new GeoCoordinate(destinatin.Latitude, destinatin.Longitude);
+
+            distance = sourceCoord.GetDistanceTo(destinationCoord);
+
+            return distance;
+        }
     }
 }

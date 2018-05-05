@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Distance Calculator";
+}
+
+<h2>Airports Distance Calculator</h2>
+
+<div id="airportsDistance">
+    <div class="row">
+        <div class="col-md-2">
+            Source Airport
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <select class="distance-select form-control" data-bind="options: airports, optionsText: 'Name', optionsValue: 'Iata', value: sourceAirport, optionsCaption: 'Select source airport.'"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            Destination Airport
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <select class="distance-select form-control" data-bind="options: airports, optionsText: 'Name', optionsValue: 'Iata', value: destinationAirport, optionsCaption: 'Select destination airport.'"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            Distance
+        </div>
+        <div class="col-md-6" data-bind="with: distanceModel">
+            <span data-bind="text: DistanceDisplay"></span>
+
+            <div data-bind="visible: (ApiUrl().length > 0)">
+                <a data-bind="text: ApiUrl, attr:{'href': ApiUrl}" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-6">
+            <button data-bind="click: calculateDistance">Calculate Distance</button>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/scripts/airports/list.js"></script>
+}
+

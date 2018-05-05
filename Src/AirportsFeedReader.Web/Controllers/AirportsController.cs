@@ -28,6 +28,20 @@ namespace AirportsFeedReader.Web.Controllers
         }
 
         [HttpGet]
+        //[OutputCache(Duration = int.MaxValue, VaryByParam = "none")]
+        public ActionResult Distance()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> CalculateDistance(string source, string destination)
+        {
+            var distance = await this.AirportRepository.CalculateDistance(source, destination);
+            return this.Json(distance, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         [FromFeedHeader]
         public async Task<JsonResult> GetAirportsList()
         {

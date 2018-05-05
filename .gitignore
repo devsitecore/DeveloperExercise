@@ -5,6 +5,7 @@
 /Src/.vs/config
 /Src/AirportsFeedReader.Data/bin
 /Src/AirportsFeedReader.Data/obj
+/Src/AirportsFeedReader.Data/obj/Debug
 /Src/AirportsFeedReader.Common/obj
 /Src/AirportsFeedReader.Common/bin
 /Src/AirportsFeedReader.Foundation/bin
