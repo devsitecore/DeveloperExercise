@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Data\json\eu_countries_data.json" />
-    <Content Include="Attributes\FromFeedHeaderAttribute.cs" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -181,7 +180,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FromFeedHeaderAttribute.cs" />
+    <Compile Include="Attributes\FromFeedHeaderAttribute.cs" />
     <Compile Include="App_Start\ControllerFactory.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ContainerConfig.cs" />
