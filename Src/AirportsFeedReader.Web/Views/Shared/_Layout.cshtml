@@ -6,6 +6,10 @@
     <title>@ViewBag.Title - European Airports</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    @RenderSection("styles", required: false)
+
+
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -36,5 +40,8 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/lib/knockout-3.4.2.js"></script>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

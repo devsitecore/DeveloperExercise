@@ -11,27 +11,27 @@ namespace AirportsFeedReader.Foundation.Extensions
 
     public static class FoundationExtensions
     {
-        public static string ToJson(this Airport[] airports)
+        public static string ToJson<T>(this T model)
         {
-            var serializer = new DataContractJsonSerializer(typeof(Airport[]));
+            var serializer = new DataContractJsonSerializer(typeof(T));
 
             using (var ms = new MemoryStream())
             {
-                serializer.WriteObject(ms, airports);
+                serializer.WriteObject(ms, model);
                 var jsonData = Encoding.UTF8.GetString(ms.ToArray());
 
                 return jsonData;
             }
         }
 
-        public static Airport[] ToAirports(this string data)
+        public static T ToModelList<T>(this string jsonData)
         {
-            var serializer = new DataContractJsonSerializer(typeof(Airport[]));
+            var serializer = new DataContractJsonSerializer(typeof(T));
 
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(data)))
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonData)))
             {
-                var airports = (Airport[])serializer.ReadObject(stream);
-                return airports;
+                var modelArray = (T)serializer.ReadObject(stream);
+                return modelArray;
             }
         }
     }

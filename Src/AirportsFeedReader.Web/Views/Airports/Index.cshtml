@@ -3,5 +3,27 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Airports List</h2>
+
+<div id="airports">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <select class="countries-select form-control" data-bind="options: countries, optionsText: 'Name', optionsValue: 'CountryCode', value: selectedCountryCode, optionsCaption: 'Select a country to filter.'"></select>
+            </div>
+        </div>
+    </div>
+    <div id="airportGrid" class="jsgrid">
+    </div>
+</div>
+
+@section styles{
+    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+}
+
+@section scripts{
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    <script type="text/javascript" src="~/scripts/airports/list.js"></script>
+}
 

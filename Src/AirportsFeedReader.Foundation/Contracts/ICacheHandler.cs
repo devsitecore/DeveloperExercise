@@ -10,6 +10,6 @@ namespace AirportsFeedReader.Foundation.Contracts
     {
         FeedSource FeedSource { get; set; }
 
-        string GetData();
+        string GetData(string cacheKey = "");
     }
 }

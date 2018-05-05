@@ -1,5 +1,6 @@
 ﻿using AirportsFeedReader.Foundation.Contracts;
 using AirportsFeedReader.Foundation.Extensions;
+using AirportsFeedReader.Foundation.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,16 +13,15 @@ namespace AirportsFeedReader.Web.Controllers
 {
     public class AirportsController : Controller
     {
-        private readonly string FeedUrl = ConfigurationManager.AppSettings["AirportsFeed"];
+        private IAirportRepository AirportRepository { get; set; }
 
-        private IFeedReader FeedReader { get; set; }
-
-        public AirportsController(IFeedReader feedReader)
+        public AirportsController(IAirportRepository airportRepository)
         {
-            this.FeedReader = feedReader;
+            this.AirportRepository = airportRepository;
         }
 
         [HttpGet]
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "none")]
         public ActionResult Index()
         {
             return View();
@@ -31,9 +31,7 @@ namespace AirportsFeedReader.Web.Controllers
         [FromFeedHeader]
         public async Task<JsonResult> GetAirportsList()
         {
-            var feedResult = await this.FeedReader.Read(this.FeedUrl);
-            var airports = feedResult.Data.ToAirports();
-
+            var airports = await this.AirportRepository.GetAirports();
             return this.Json(airports, JsonRequestBehavior.AllowGet);
         }
     }

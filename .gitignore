@@ -4,6 +4,7 @@
 
 /Src/.vs/config
 /Src/AirportsFeedReader.Data/bin
+/Src/AirportsFeedReader.Data/obj
 /Src/AirportsFeedReader.Common/obj
 /Src/AirportsFeedReader.Common/bin
 /Src/AirportsFeedReader.Foundation/bin
@@ -15,3 +16,5 @@
 /Src/AirportsFeedReader.Web/bin
 /Src/AirportsFeedReader.Web/obj
 /Src/packages
+/Src/.vs/AirportsFeedReader/v14
+*.bak

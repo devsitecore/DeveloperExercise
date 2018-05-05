@@ -1,22 +1,33 @@
-﻿namespace AirportsFeedReader.Services.Services
+﻿// <copyright file="CacheHandler.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace AirportsFeedReader.Services.Services
 {
-    using Foundation.Contracts;
     using System;
     using System.Configuration;
+    using Foundation.Contracts;
     using Foundation.Model;
 
-    class CacheHandler : ICacheHandler
+    public class CacheHandler : ICacheHandler
     {
-        private ICacheStorage CacheStorage { get; set; }
-        private readonly int DefaultCacheTimeOut = 5;
+        private readonly int defaultCacheTimeOut = 5;
+        private readonly string cacheTimeoutMinutesKey = "CacheTimeoutMinutes";
+
+        public CacheHandler(ICacheStorage cacheStorage)
+        {
+            this.CacheStorage = cacheStorage;
+        }
+
+        public FeedSource FeedSource { get; set; }
 
         protected virtual int CacheTimeOut
         {
             get
             {
-                var timeout = DefaultCacheTimeOut;
+                var timeout = this.defaultCacheTimeOut;
 
-                var setting = ConfigurationManager.AppSettings["CacheTimeoutMinutes"];
+                var setting = ConfigurationManager.AppSettings[this.cacheTimeoutMinutesKey];
 
                 if (!string.IsNullOrEmpty(setting))
                 {
@@ -27,30 +38,12 @@
             }
         }
 
-        public FeedSource FeedSource { get; set; }
+        private ICacheStorage CacheStorage { get; set; }
 
-        public CacheHandler(ICacheStorage cacheStorage)
-        {
-            this.CacheStorage = cacheStorage;
-        }
-
-        protected virtual bool IsCacheExpired(DateTime cacheDate)
-        {
-            var expired = false;
-
-            if (cacheDate.AddMinutes(CacheTimeOut) < DateTime.UtcNow)
-            {
-                expired = true;
-            }
-
-            return expired;
-        }
-
-
-        public string GetData()
+        public string GetData(string cacheKey = "")
         {
             var data = string.Empty;
-            var result = this.CacheStorage.GetData();
+            var result = this.CacheStorage.GetData(cacheKey);
 
             if (!this.IsCacheExpired(result.CacheDate))
             {
@@ -59,11 +52,23 @@
             }
             else
             {
-                this.CacheStorage.ClearData();
+                this.CacheStorage.ClearData(cacheKey);
                 this.FeedSource = FeedSource.Feed;
             }
 
             return data;
+        }
+
+        protected virtual bool IsCacheExpired(DateTime cacheDate)
+        {
+            var expired = false;
+
+            if (cacheDate.AddMinutes(this.CacheTimeOut) < DateTime.UtcNow)
+            {
+                expired = true;
+            }
+
+            return expired;
         }
     }
 }

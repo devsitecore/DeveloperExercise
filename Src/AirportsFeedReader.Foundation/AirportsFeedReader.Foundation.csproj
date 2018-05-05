@@ -51,12 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ICountryRepository.cs" />
+    <Compile Include="Contracts\IAirportRepository.cs" />
     <Compile Include="Contracts\ICacheHandler.cs" />
     <Compile Include="Contracts\IFilterFeedResult.cs" />
     <Compile Include="Contracts\IFeedReader.cs" />
     <Compile Include="Contracts\ICacheStorage.cs" />
     <Compile Include="Extensions\FoundationExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\Country.cs" />
     <Compile Include="Model\Airport.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\FeedReaderResult.cs" />

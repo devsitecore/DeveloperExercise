@@ -1,14 +1,15 @@
-﻿// <copyright file="IFeedReader.cs" company="PlaceholderCompany">
+﻿// <copyright file="IAirportRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace AirportsFeedReader.Foundation.Contracts
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Model;
 
-    public interface IFeedReader
+    public interface IAirportRepository
     {
-        Task<FeedReaderResult> Read(string feedUrl, string cacheKey = "");
+        Task<IList<Airport>> GetAirports();
     }
 }

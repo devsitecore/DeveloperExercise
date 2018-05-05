@@ -163,17 +163,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\json\eu_countries_data.json" />
     <Content Include="Attributes\FromFeedHeaderAttribute.cs" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\airports\list.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\lib\knockout-3.4.2.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -183,6 +186,7 @@
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -208,8 +212,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\cache\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Countries\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AirportsFeedReader.Common\AirportsFeedReader.Common.csproj">

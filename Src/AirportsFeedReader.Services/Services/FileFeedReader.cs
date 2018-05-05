@@ -1,24 +1,23 @@
-﻿// <copyright file="HttpFeedReader.cs" company="PlaceholderCompany">
+﻿// <copyright file="FileFeedReader.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace AirportsFeedReader.Services.Services
 {
-    using System.Net.Http;
+    using System.IO;
     using System.Threading.Tasks;
+    using Common.Extensions;
+    using Common.Unity;
     using Foundation.Contracts;
     using Foundation.Model;
 
-    public class HttpFeedReader : IFeedReader
+    public class FileFeedReader : IFeedReader
     {
-        public HttpFeedReader(ICacheHandler cacheHandler, ICacheStorage cacheStorage, IFilterFeedResult filterFeedResult)
+        public FileFeedReader(ICacheStorage cacheStorage)
         {
             this.CacheStorage = cacheStorage;
-            this.CacheHandler = cacheHandler;
-            this.FilterFeedResult = filterFeedResult;
+            this.FilterFeedResult = DependencyInjection.Instance().Container.Resolve<IFilterFeedResult>("FilterCountriesFeedResult");
         }
-
-        private ICacheHandler CacheHandler { get; set; }
 
         private ICacheStorage CacheStorage { get; set; }
 
@@ -27,18 +26,20 @@ namespace AirportsFeedReader.Services.Services
         public async Task<FeedReaderResult> Read(string feedUrl, string cacheKey = "")
         {
             var feedReaderResult = new FeedReaderResult();
-            var data = this.CacheHandler.GetData(cacheKey);
+            var cacheResult = this.CacheStorage.GetData(cacheKey);
+            var data = cacheResult.Data;
             var feedSource = FeedSource.Cache;
 
             if (string.IsNullOrEmpty(data))
             {
                 feedSource = FeedSource.Feed;
+                feedUrl = feedUrl.ConvertToApplicationRootPath();
 
-                var httpClient = new HttpClient();
-                var feedData = await httpClient.GetAsync(feedUrl);
-                data = await feedData.Content.ReadAsStringAsync();
-
-                data = this.FilterFeedResult.Filter(data);
+                if (File.Exists(feedUrl))
+                {
+                    data = await Task.Run(() => File.ReadAllText(feedUrl));
+                    data = this.FilterFeedResult.Filter(data);
+                }
 
                 this.CacheStorage.SaveDate(data, cacheKey);
             }

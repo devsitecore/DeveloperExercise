@@ -13,10 +13,11 @@ namespace AirportsFeedReader.Common.Extensions
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="container">The container.</param>
+        /// <param name="name">The type name.</param>
         /// <returns>Resolved Type Object</returns>
-        public static T Resolve<T>(this UnityContainer container)
+        public static T Resolve<T>(this UnityContainer container, string name = "")
         {
-            var returnObject = container.Resolve(typeof(T), string.Empty, null);
+            var returnObject = container.Resolve(typeof(T), name, null);
 
             if (!(returnObject is T))
             {

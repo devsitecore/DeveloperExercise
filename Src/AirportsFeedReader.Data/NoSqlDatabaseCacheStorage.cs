@@ -8,12 +8,15 @@ namespace AirportsFeedReader.Data
     using System.Data;
     using System.Data.SQLite;
     using System.IO;
-    using System.Reflection;
+    using Common.Extensions;
     using Foundation.Contracts;
     using Foundation.Model;
 
     public class NoSqlDatabaseCacheStorage : ICacheStorage
     {
+        private readonly string noSqlConnectionStringName = "NoSqlCacheDatabaseConnectionString";
+        private readonly string defaultCacheKey = "AirportsCacheData";
+
         protected virtual string DataTableName
         {
             get
@@ -34,9 +37,8 @@ namespace AirportsFeedReader.Data
         {
             get
             {
-                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["NoSqlCacheDatabaseConnectionString"]?.ConnectionString;
-                connectionString = connectionString.Replace("~", ApplicationRootDirectory());
-                return connectionString;
+                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings[this.noSqlConnectionStringName]?.ConnectionString;
+                return connectionString.ConvertToApplicationRootPath();
             }
         }
 
@@ -50,7 +52,7 @@ namespace AirportsFeedReader.Data
                 {
                     connection.Open();
 
-                    var sql = "create table " + this.DataTableName + " (cachedate datetime, cachedata nvarchar(100))";
+                    var sql = "create table " + this.DataTableName + " (cacheDate datetime, cacheData nvarchar(100), cacheKey varchar(50))";
 
                     using (var command = new SQLiteCommand(sql, connection))
                     {
@@ -60,7 +62,7 @@ namespace AirportsFeedReader.Data
             }
         }
 
-        public virtual CacheResult<string> GetData()
+        public virtual CacheResult<string> GetData(string cacheKey = "")
         {
             this.Initialize();
 
@@ -71,7 +73,7 @@ namespace AirportsFeedReader.Data
             using (var connection = new SQLiteConnection(this.SQLiteConnectionString))
             {
                 connection.Open();
-                var sql = "select * from " + this.DataTableName;
+                var sql = this.GetSelectSql(cacheKey);
 
                 using (var command = new SQLiteCommand(sql, connection))
                 {
@@ -98,13 +100,13 @@ namespace AirportsFeedReader.Data
             return result;
         }
 
-        public virtual void ClearData()
+        public virtual void ClearData(string cacheKey = "")
         {
             using (var connection = new SQLiteConnection(this.SQLiteConnectionString))
             {
                 connection.Open();
 
-                var sql = "delete from " + this.DataTableName;
+                var sql = string.Format("delete from {0} where cacheKey='{1}'", this.DataTableName, this.GetCacheKey(cacheKey));
 
                 using (var command = new SQLiteCommand(sql, connection))
                 {
@@ -115,9 +117,9 @@ namespace AirportsFeedReader.Data
             }
         }
 
-        public virtual bool SaveDate(string data)
+        public virtual bool SaveDate(string data, string cacheKey = "")
         {
-            this.ClearData();
+            this.ClearData(cacheKey);
 
             using (var connection = new SQLiteConnection(this.SQLiteConnectionString))
             {
@@ -125,7 +127,7 @@ namespace AirportsFeedReader.Data
 
                 data = data.Replace("'", "''");
 
-                var sql = "insert into " + this.DataTableName + " (cachedate, cachedata) values ('" + DateTime.UtcNow + "', '" + data + "')";
+                var sql = string.Format("insert into {0} (cacheDate, cacheData, cacheKey) values ('{1}', '{2}', '{3}')", this.DataTableName, DateTime.UtcNow, data, this.GetCacheKey(cacheKey));
 
                 using (var command = new SQLiteCommand(sql, connection))
                 {
@@ -138,16 +140,15 @@ namespace AirportsFeedReader.Data
             return true;
         }
 
-        private static string ApplicationRootDirectory()
+        protected virtual string GetSelectSql(string cacheKey)
         {
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            UriBuilder uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
+            return string.Format("select * from {0} where cacheKey='{1}'", this.DataTableName, this.GetCacheKey(cacheKey));
+        }
 
-            path = Path.GetDirectoryName(path);
-            path = Path.GetDirectoryName(path);
-
-            return path;
+        private string GetCacheKey(string cacheKey)
+        {
+            cacheKey = string.IsNullOrEmpty(cacheKey) ? this.defaultCacheKey : cacheKey;
+            return cacheKey;
         }
     }
 }

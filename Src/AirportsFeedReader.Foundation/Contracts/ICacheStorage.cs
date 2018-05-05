@@ -8,12 +8,12 @@ namespace AirportsFeedReader.Foundation.Contracts
 
     public interface ICacheStorage
     {
-        CacheResult<string> GetData();
+        CacheResult<string> GetData(string cacheKey = "");
 
-        bool SaveDate(string data);
+        bool SaveDate(string data, string cacheKey = "");
 
         void Initialize();
 
-        void ClearData();
+        void ClearData(string cacheKey = "");
     }
 }
