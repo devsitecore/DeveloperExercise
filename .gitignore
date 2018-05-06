@@ -21,3 +21,5 @@
 *.bak
 /Documentation
 *.coverage
+*.nosql
+*.user

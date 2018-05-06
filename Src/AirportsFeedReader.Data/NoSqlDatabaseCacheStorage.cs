@@ -95,18 +95,21 @@ namespace AirportsFeedReader.Data
 
         public virtual void ClearData(string cacheKey = "")
         {
-            using (var connection = new SQLiteConnection(this.SQLiteConnectionString))
+            if (File.Exists(this.SQLiteFilePath))
             {
-                connection.Open();
-
-                var sql = string.Format("delete from {0} where cacheKey='{1}'", this.dataTableName, this.GetCacheKey(cacheKey));
-
-                using (var command = new SQLiteCommand(sql, connection))
+                using (var connection = new SQLiteConnection(this.SQLiteConnectionString))
                 {
-                    command.ExecuteNonQuery();
-                }
+                    connection.Open();
 
-                connection.Close();
+                    var sql = string.Format("delete from {0} where cacheKey='{1}'", this.dataTableName, this.GetCacheKey(cacheKey));
+
+                    using (var command = new SQLiteCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    connection.Close();
+                }
             }
         }
 
