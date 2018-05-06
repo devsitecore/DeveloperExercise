@@ -49,5 +49,21 @@ namespace AirportsFeedReader.Tests
 
             Assert.AreNotEqual(data.Distance, 0);
         }
+
+        [TestMethod]
+        public void TestDistanceWithNullParam()
+        {
+            var data = this.AirportRepository.CalculateDistance("HKV", "InvalidIATA");
+
+            Assert.IsTrue(data.Distance == 0);
+        }
+
+        [TestMethod]
+        public void DistanceBetweenAirportsWithUnitUsingRepo()
+        {
+            var data = this.AirportRepository.CalculateDistance("HKV", "JAM");
+
+            Assert.IsTrue(data.Distance > 0 && !string.IsNullOrEmpty(data.Unit));
+        }
     }
 }
