@@ -24,6 +24,31 @@ namespace AirportsFeedReader.Common.Extensions
                 path = path.Replace("~", appPath);
             }
 
+            EnsurePath(path, true);
+            return path;
+        }
+
+        private static string EnsurePath(string path, bool isFilePath = false)
+        {
+            var folderPath = path;
+
+            if (isFilePath)
+            {
+                folderPath = Path.GetDirectoryName(path);
+            }
+
+            var parent = Path.GetDirectoryName(path);
+
+            if (!Directory.Exists(parent))
+            {
+                return EnsurePath(parent);
+            }
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
             return path;
         }
     }
