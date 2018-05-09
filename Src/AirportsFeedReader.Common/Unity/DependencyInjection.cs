@@ -38,9 +38,13 @@ namespace AirportsFeedReader.Common.Unity
         /// <returns>UnityContainer</returns>
         public UnityContainer Initialize()
         {
-            var container = new UnityContainer();
-            container.LoadConfiguration();
-            return this.Container = container;
+            if (this.Container == null)
+            {
+                this.Container = new UnityContainer();
+                this.Container.LoadConfiguration();
+            }
+
+            return this.Container;
         }
     }
 }
